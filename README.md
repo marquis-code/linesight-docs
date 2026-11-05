@@ -4,6 +4,7 @@
 - [Revenue model](revenue-model.md)
 - [Security and production gaps](security-and-gaps.md)
 - [API reference](api.md)
+- [Feature coverage matrix](feature-matrix.md)
 - [Image credits](image-credits.md)
 - [Original proposal](Pipeline_Diagnostics_Platform_Proposal.pdf)
 
