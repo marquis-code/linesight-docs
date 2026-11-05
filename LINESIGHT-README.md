@@ -1,6 +1,6 @@
 # LineSight — Pipeline Diagnostics & Pigging Platform
 
-A working, full-stack MVP of the commercial platform described in the
+A working, full-stack implementation of the commercial platform described in the
 *Next-Generation Pipeline Diagnostics & Pigging Commercial Platform* proposal.
 
 LineSight connects inspection and pigging data to the commercial workflows around
@@ -70,11 +70,13 @@ All customer accounts use `LineSightDemo!2026`.
 | Utility engineer (Harris County Water) | `utility@linesight.io` |
 | Homeowner (Cedar Ridge HOA) | `homeowner@linesight.io` |
 | Contractor (Precision Trenchless) | `contractor@linesight.io` |
+| Manufacturer (PolyForm Supply) | `supplier@linesight.io` |
 | Studio operations admin | `ops@linesight.io` / `LineSightOps!2026` |
 
-The seed includes two pipeline operators, a live B31G report, a homeowner job
-with three findings and contractor bids, marketplace products, orders, rentals,
-subscription plans, manufacturers and inbound leads.
+The seed includes two pipeline operators, live B31G reports, uploaded-run history,
+a homeowner job with three findings and contractor bids, marketplace products,
+orders, invoices, payments, rentals, subscriptions, a verified contractor profile,
+work orders, manufacturers, notifications, audit events and inbound leads.
 
 ## What works end to end
 
@@ -95,20 +97,44 @@ subscription plans, manufacturers and inbound leads.
 - **SEO/performance** — SSR marketing pages, route-level SPA for authenticated
   portal routes, self-hosted fonts, responsive AVIF/WebP images.
 
+## Full workflow coverage
+
+- **File ingestion** — multipart CSV upload, server-side parsing, stored file path
+  and anomaly rows, automatic previous-run comparison.
+- **Report delivery** — server-generated PDF evidence pack and downloadable
+  invoice PDFs.
+- **Digital twin** — interactive Three.js anomaly orbit view with canvas fallback
+  for devices without WebGL.
+- **Payments and refunds** — invoice issue, capture, payment ledger, refunds and
+  customer/admin PDFs. Provider mode is selected with `PAYMENTS_PROVIDER`.
+- **Rental lifecycle** — availability check, reservation, pickup, return, late
+  fee, deposit refund and invoice.
+- **Contractor operations** — profile/licence/insurance submission, admin
+  verification, awarded bid → work order → completion evidence → admin
+  verification → escrow release.
+- **Manufacturer self-service** — partner workspace with catalog creation,
+  publish/unpublish and product inventory.
+- **Customer communications** — notification inbox, read state and Studio
+  notification queue.
+- **Governance** — audit trail for orders, rentals, invoices, contractors,
+  reports, settings and user changes; user role/active-state administration.
+- **Accounts** — self-service registration, login, forgot/reset password and
+  logout.
+- **PWA** — installable manifest, offline shell and cached imagery.
+
 ## Explicit production gaps
 
-This is a high-fidelity MVP, not a three-month production launch. Before real
-customers or money move, the following need provider-backed implementation:
+The application is fully functional locally with seeded data and local provider
+adapters. Before real customers or money move, external accounts are still
+required for:
 
-- Stripe/Paystack checkout and webhooks (payments are currently simulated).
-- S3/R2 uploads for ILI files, videos and report PDFs (footage is referenced,
-  not stored).
-- Production ML model for video triage (the current engine is deterministic).
-- Email/SMS notifications, signed PDF reports and e-signature.
+- Stripe/Paystack credentials and webhook secrets (a complete invoice/payment/refund ledger runs locally in simulator mode).
+- S3/R2 for multi-region file storage (local uploads and PDF generation are working).
+- Production ML model for video triage (the contract and deterministic engine are working).
+- SMTP/SMS delivery, e-signature and notarisation (the outbox, notifications and signed PDFs are built).
 - SSO/SCIM, immutable audit sink and penetration testing.
-- Real manufacturer contracts, inventory feeds and tax/freight calculation.
-- GIS/map tiles and true 3D/WebGL rendering (the report currently uses a
-  performant canvas profile).
+- Real manufacturer contracts and carrier rates (inventory, tax and invoices are built).
+- GIS tiles for the route map (the interactive Three.js digital twin and canvas fallback are built).
 
 See [`docs/architecture.md`](docs/architecture.md), [`docs/revenue-model.md`](docs/revenue-model.md)
 and [`docs/security-and-gaps.md`](docs/security-and-gaps.md).

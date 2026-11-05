@@ -81,7 +81,13 @@
 | `jobs` | Homeowner camera job, findings, certificate, status |
 | `bids` | Contractor price/timeline/note on a scoped job |
 | `escrows` | Funded amount + milestone release state |
-| `leads` | Contact and configurator demand |
+| `leads` | Contact, partner and configurator demand |
+| `invoices` / `payments` / `refunds` | Billing ledger and provider references |
+| `contractorprofiles` | Licence, insurance, service areas and verification |
+| `workorders` | Awarded bid, schedule, completion evidence and verification |
+| `auditlogs` / `notifications` | Governance trail and communication outbox |
+| `settings` | Runtime configuration such as tax and support routing |
+| `passwordresets` | One-hour password recovery tokens |
 
 ## End-to-end flows
 
@@ -106,6 +112,30 @@
 3. Contractors submit bids.
 4. Homeowner awards a bid; API creates a funded escrow with three milestones.
 5. Milestones release through `POST /api/portal/escrow/:jobId/release`.
+
+## Additional implemented flows
+
+### Upload and PDF
+`POST /api/portal/inspections/upload` accepts a multipart CSV, stores it under
+`UPLOAD_DIR`, parses rows server-side, screens them and stores the report. The
+report/invoice PDFs are generated on demand by `PdfService` and streamed as
+`application/pdf`.
+
+### Digital twin and comparison
+The report page renders a Three.js pipeline with anomaly rings and depth
+markers. `GET /api/portal/reports/:id/comparison` aligns the previous report on
+the same asset and returns per-anomaly depth deltas.
+
+### Money
+Orders, rentals and subscriptions issue an invoice and capture a payment in the
+same transaction-like workflow. Admin refunds write a `refunds` record and move
+the invoice to `refunded`. The provider adapter is selected by
+`PAYMENTS_PROVIDER`; simulator mode is the default.
+
+### Contractor verification
+Awarding a bid creates a `workorder`. The contractor submits completion notes
+and photo URLs, then Studio verifies the work. Verification releases all escrow
+milestones and increments the contractor's completed-job count.
 
 ## Production topology
 - Web + Studio on a Node host/CDN; API and Engine on private container services.

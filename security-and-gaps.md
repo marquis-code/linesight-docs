@@ -1,7 +1,8 @@
 # Security, compliance and production gaps
 
 ## Implemented
-- JWT bearer auth with role and org claims.
+- JWT bearer auth with role and org claims; self-service registration and
+  one-hour password reset tokens.
 - Tenant scoping on portal reads/writes (`orgId` derived from the token).
 - Password hashing with bcrypt (12 rounds).
 - Admin routes protected by role guard (`owner`, `admin`, `ops`).
@@ -10,6 +11,12 @@
 - No secrets committed; `.env.example` only.
 - Report calculations carry inputs and method in the stored record.
 - Responsive, keyboard-accessible forms and focus states.
+- CSV upload limits (15 MB), server-side parsing and tenant-scoped report access.
+- Server-generated PDF reports and invoice PDFs.
+- Invoice, payment and refund ledger with provider field.
+- Contractor profile, work-order completion and admin verification.
+- Audit log for sensitive operations and a notification outbox.
+- PWA manifest and offline shell for the public/portal app.
 
 ## Must be completed before production
 1. **Payments** — replace simulated checkout/rental/escrow with Stripe/Paystack,
