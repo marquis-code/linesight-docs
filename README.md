@@ -9,6 +9,5 @@
 - [Original proposal](Pipeline_Diagnostics_Platform_Proposal.pdf)
 
 The proposal defines an $11B+ market, nine revenue streams across B2B/B2C,
-a 3-month build and an NGN 5M fixed development fee. This implementation is the
-working product implementation; commercial terms and production integrations still require
-client sign-off.
+a 3-month build and an NGN 5M fixed development fee. This implementation is the working product; commercial terms and production
+integrations still require client sign-off.
