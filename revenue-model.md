@@ -1,26 +1,26 @@
 # Revenue model
 
-The proposal calls for nine revenue streams across B2B and B2C. The MVP
+The proposal calls for nine revenue streams across B2B and B2C. The platform
 implements the product surfaces and ledger fields for the core streams.
 
 ## B2B
 
-| Stream | Product surface | MVP behavior | Production step |
+| Stream | Product surface | Current behavior | Production step |
 |---|---|---|---|
 | Integrity subscriptions | Foundation / Scale / Enterprise plans | Mileage-based annual value; plan switching | Stripe subscription + metering |
-| Marketplace take rate | LineSight Market | Orders with 8% commission recorded | Payment capture, tax, freight, returns |
+| Marketplace take rate | Vomtek Market | Orders with 8% commission recorded | Payment capture, tax, freight, returns |
 | Rentals / HaaS | Rentals catalog | Weekly price, deposit, reservation, Studio status | Availability calendar + payment hold |
 | Manufacturer subscriptions | Studio → Partners | Plan, monthly fee, listing count | Self-serve partner portal + billing |
 | Data / API / enterprise | Intelligence positioning | Tenant-scoped API, Swagger, export-ready reports | Paid API keys, usage metering, SSO |
 
 ## B2C
 
-| Stream | Product surface | MVP behavior | Production step |
+| Stream | Product surface | Current behavior | Production step |
 |---|---|---|---|
-| Home line reports | LineSight Home | $149 product, 24h positioning, report certificate | Payment + PDF delivery |
+| Home line reports | Vomtek Home | $149 product, 24h positioning, report certificate | Payment + PDF delivery |
 | Camera / kit rentals | Rentals | Camera kit reservation, refundable deposit | Logistics + deposit capture |
 | Contractor referrals | Contractor network | Bids on scoped jobs | License verification + take rate |
-| LineAssure escrow | Home job detail | Funded milestones, release action | Regulated escrow/payment partner |
+| Vomtek Assure escrow | Home job detail | Funded milestones, release action | Regulated escrow/payment partner |
 | Certification | Health certificate | Visual certificate stored on job | Standards body / verifiable credential |
 
 ## Marketplace economics

@@ -1,15 +1,15 @@
-# LineSight architecture
+# Vomtek architecture
 
 ## System context
 
 ```
                     ┌──────────────────────────────┐
- B2B operator ─────▶│  linesight-web (Nuxt 3 SSR)  │
+ B2B operator ─────▶│  vomtek-platform-web (Nuxt 3 SSR)  │
  B2C homeowner ────▶│  marketing + customer portal │
  Contractor ───────▶└──────────────┬───────────────┘
                                    │ HTTPS / JSON
                     ┌──────────────▼───────────────┐
-                    │  linesight-api (NestJS 11)   │
+                    │  vomtek-platform-api (NestJS 11)   │
                     │ auth · tenancy · assets      │
                     │ reports · market · rentals   │
                     │ jobs · bids · escrow         │
@@ -17,20 +17,20 @@
                             │              │
                   MongoDB 7 │              │ HTTP
                             │      ┌───────▼────────────────┐
-                            │      │ linesight-engine       │
+                            │      │ vomtek-platform-engine       │
                             │      │ FastAPI · B31G · CGR   │
                             │      │ visual triage contract │
                             │      └────────────────────────┘
                             │
               ┌─────────────▼──────────────┐
-              │  linesight-studio (Nuxt)   │
+              │  vomtek-platform-studio (Nuxt)   │
               │  operations / revenue      │
               └────────────────────────────┘
 ```
 
 ## Services
 
-### `linesight-web` — Nuxt 3.21
+### `vomtek-platform-web` — Nuxt 3.21
 - SSR marketing routes for SEO.
 - `/app/**` is client-rendered because the session lives in a bearer token.
 - Marketing: home, intelligence, homeowners, marketplace, product detail,
@@ -40,14 +40,14 @@
 - Self-hosted Clash Display/Satoshi/IBM Plex Mono; responsive AVIF/WebP/JPEG
   images; canvas anomaly profile.
 
-### `linesight-studio` — Nuxt 3 SPA
+### `vomtek-platform-studio` — Nuxt 3 SPA
 - Staff-only operations console on port 3210.
 - Talks only to `/api/admin/*` with a JWT.
 - Revenue dashboard, customers, orders, rentals, reports, B2C jobs, catalog,
   subscriptions, manufacturer partners, leads and runtime settings.
 
-### `linesight-api` — NestJS 11
-- MongoDB via Mongoose. Database `linesight` on `localhost:27019`.
+### `vomtek-platform-api` — NestJS 11
+- MongoDB via Mongoose. Database `vomtek` on `localhost:27019`.
 - JWT bearer auth (7 days in the demo); roles `owner`, `admin`, `engineer`,
   `contractor`, `homeowner`, `ops`.
 - Every portal entity carries `orgId`; controllers derive the org from the JWT
@@ -57,7 +57,7 @@
   compute service is down.
 - Swagger at `/api/docs`.
 
-### `linesight-engine` — FastAPI
+### `vomtek-platform-engine` — FastAPI
 - `POST /v1/ili/analyze`: anomaly rows + asset metadata → B31G screening,
   corrosion growth rate, remaining life, heatmap points and safe pressure.
 - `POST /v1/video/analyze`: deterministic visual findings behind a stable

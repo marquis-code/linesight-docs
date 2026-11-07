@@ -55,7 +55,7 @@ intentionally not built in this repository.
 | Return / late fee / deposit refund | Working | portal |
 | Logistics carrier integration | Roadmap | no carrier API |
 
-## B2C / LineSight Home
+## B2C / Vomtek Home
 | Feature | Status | Where |
 |---|---|---|
 | Homeowner job creation | Working | `/app/home` |
