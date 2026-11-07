@@ -1,12 +1,12 @@
 services:
   mongo:
     image: mongo:7
-    container_name: linesight-mongo
+    container_name: vomtek-platform-mongo
     restart: unless-stopped
     ports:
       - "27019:27017"
     volumes:
-      - linesight_mongo:/data/db
+      - vomtek_mongo:/data/db
 
 volumes:
-  linesight_mongo:
+  vomtek_mongo:
